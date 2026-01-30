@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+
+import HeartsBackground from "../components/HeartsBackground.astro";
+import AudioToggle from "../components/AudioToggle.astro";
+import Hero from "../components/Hero.astro";
+import Reasons from "../components/Reasons.astro";
+import MemoryCarousel from "../components/MemoryCarousel.astro";
+import FinalQuestion from "../components/FinalQuestion.astro";
+---
+<BaseLayout title="Pre teba 💗">
+  <HeartsBackground />
+  <AudioToggle />
+<main class="relative z-10">
+    <Hero />
+    <Reasons />
+    <MemoryCarousel />
+    <FinalQuestion />
+  </main>
+</BaseLayout>

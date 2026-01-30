@@ -1,0 +1,48 @@
+<div id="tsparticles" class="fixed inset-0 z-0 opacity-70 pointer-events-none"></div>
+
+<script>
+  import { tsParticles } from "@tsparticles/engine";
+  import { loadBasic } from "@tsparticles/basic";
+  import { loadImageShape } from "@tsparticles/shape-image";
+
+  const init = async () => {
+    await loadBasic(tsParticles);
+    await loadImageShape(tsParticles);
+
+    const isMobile = matchMedia("(max-width: 768px)").matches;
+
+    await tsParticles.load({
+      id: "tsparticles",
+      options: {
+        background: { color: { value: "transparent" } },
+        fpsLimit: 60,
+        detectRetina: true,
+        particles: {
+          number: {
+            value: isMobile ? 14 : 24,
+            density: { enable: true, width: 900, height: 900 },
+          },
+          shape: {
+            type: "image",
+            options: {
+              image: {
+                src: "/heart.svg",
+                width: 32,
+                height: 29,
+              },
+            },
+          },
+          opacity: { value: 0.35 },
+          size: { value: { min: 10, max: 20 } },
+          move: {
+            enable: true,
+            speed: 0.6,
+            outModes: { default: "out" },
+          },
+        },
+      },
+    });
+  };
+
+  init();
+</script>

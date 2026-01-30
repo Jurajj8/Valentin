@@ -1,0 +1,63 @@
+<section class="px-5 pb-24">
+  <div class="mx-auto max-w-5xl">
+    <!-- <h2 class="text-3xl md:text-4xl font-semibold text-center">Spomienky</h2> -->
+    <div class="mt-10 glassNoBorder rounded-3xl p-4 md:p-6">
+      <div class="embla overflow-hidden">
+        <div class="embla__container flex gap-4">
+          {[
+            { src: "/photos/01.jpg", cap: "Pohľad, ktorý preniká do môjo srdca." },
+            { src: "/photos/02.jpg", cap: "Domov je pocit." },
+            { src: "/photos/03.jpg", cap: "Aj v tých obyčajných chvíľach si pre mňa výnimočná." },
+            { src: "/photos/04.jpg", cap: "Každé mesto je krajšie, keď ho prežívam s tebou." },
+            { src: "/photos/05.jpg", cap: "V tom momente som vedel, že toto je spomienka, ktorú si chcem pamätať navždy." },
+            { src: "/photos/06.jpg", cap: "Spolu, len my dvaja." },
+          ].map((s) => (
+            <div class="embla__slide flex-[0_0_92%] md:flex-[0_0_70%] lg:flex-[0_0_60%]">
+<div class="rounded-3xl overflow-hidden card-glass soft-shadow">
+                <img src={s.src} alt="" class="h-[26rem] md:h-[34rem] w-full object-cover" loading="lazy" />
+                <div class="p-4 md:p-5">
+                  <p class="text-sm md:text-base italic opacity-85 leading-relaxed">
+  “{s.cap}”
+</p>
+
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-4 flex items-center justify-center gap-2">
+        <button
+  class="prev nav-btn left-3 md:left-4"
+  aria-label="Predchádzajúca fotka"
+>
+  ‹
+</button>
+
+<button
+  class="next nav-btn right-3 md:right-4"
+  aria-label="Ďalšia fotka"
+>
+  ›
+</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  const root = document.querySelector(".embla") as HTMLElement | null;
+  if (!root) throw new Error("Embla root not found");
+
+  const embla = EmblaCarousel(root, { loop: true, align: "center" });
+
+  const prev = document.querySelector(".prev") as HTMLButtonElement | null;
+  const next = document.querySelector(".next") as HTMLButtonElement | null;
+
+  prev?.addEventListener("click", () => embla.scrollPrev());
+  next?.addEventListener("click", () => embla.scrollNext());
+</script>
+

@@ -1,0 +1,154 @@
+
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg1:#fff7fb;
+  --bg2:#f3f7ff;
+  --ink:#1f2937;
+}
+html { scroll-behavior: smooth; }
+
+html, body { height: 100%; }
+body{
+  color: var(--ink);
+  /* background:
+    radial-gradient(1200px 800px at 20% 10%, #ffe6f4 0%, transparent 55%),
+    radial-gradient(1200px 800px at 80% 20%, #e8f1ff 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg1), var(--bg2)); */
+}
+
+.glass{
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.7);
+}
+
+.glassNoBorder{
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.7);
+}
+
+.soft-shadow{
+  box-shadow: 0 10px 30px rgba(31,41,55,.12);
+}
+
+
+.reasonsWrap {
+  position: relative;
+}
+.reasonsWrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(900px 500px at 20% 20%, rgba(210, 232, 255, .45) 0%, transparent 60%),
+              radial-gradient(900px 500px at 80% 60%, rgba(255, 210, 233, .45) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .6s ease;
+  z-index: -1;
+}
+.reasonsWrap.is-on::after{ opacity: 1; }
+
+.section-feather{
+  position: relative;
+  isolation: isolate;
+}
+
+/* Pseudo-element drží pastelové pozadie a "rozpúšťa" ho hore aj dole */
+.section-feather::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:-140px;
+  bottom:-140px;
+  z-index:-1;
+
+  background: var(--section-bg, transparent);
+
+  /* feather fade (top & bottom) */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,1) 18%,
+    rgba(0,0,0,1) 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,1) 18%,
+    rgba(0,0,0,1) 82%,
+    transparent 100%
+  );
+}
+
+/* Jemnejšie "sklenené" karty (profesionálnejšie než čistá biela) */
+.card-glass{
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.70);
+}
+
+/* === Pastel pozadia sekcií cez CSS premennú === */
+
+.bg-pastel-hero{
+  --section-bg:
+    radial-gradient(900px 520px at 20% 18%, rgba(255, 210, 233, .65) 0%, transparent 60%),
+    radial-gradient(900px 520px at 80% 10%, rgba(210, 232, 255, .65) 0%, transparent 60%);
+}
+
+.bg-pastel-reasons{
+  --section-bg:
+    radial-gradient(900px 520px at 15% 30%, rgba(210, 232, 255, .55) 0%, transparent 62%),
+    radial-gradient(900px 520px at 85% 70%, rgba(255, 210, 233, .55) 0%, transparent 62%);
+}
+
+/* (voliteľné) ďalšie sekcie – stačí pridať vlastnú class a nastaviť --section-bg */
+.bg-pastel-memories{
+  --section-bg:
+    radial-gradient(900px 520px at 30% 20%, rgba(255, 214, 165, .45) 0%, transparent 62%),
+    radial-gradient(900px 520px at 70% 70%, rgba(185, 217, 255, .50) 0%, transparent 62%);
+}
+
+.bg-pastel-final{
+  --section-bg:
+    radial-gradient(900px 520px at 50% 30%, rgba(255, 210, 233, .55) 0%, transparent 62%),
+    radial-gradient(900px 520px at 50% 80%, rgba(210, 232, 255, .55) 0%, transparent 62%);
+}
+
+.nav-btn{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:9999px;
+
+  display:grid;
+  place-items:center;
+
+  background: rgba(255,255,255,.70);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.75);
+  box-shadow: 0 10px 30px rgba(31,41,55,.12);
+
+  font-size: 26px;
+  line-height: 1;
+  opacity: .9;
+
+  transition: transform .2s ease, opacity .2s ease, background .2s ease;
+}
+
+.nav-btn:hover{
+  background: rgba(255,255,255,.92);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.nav-btn:active{
+  transform: translateY(-50%) scale(.98);
+}

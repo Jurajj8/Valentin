@@ -1,0 +1,78 @@
+<button
+  id="audioBtn"
+  class="fixed right-4 top-4 z-50 glass soft-shadow rounded-full px-4 py-2 text-sm hover:bg-white/70 transition"
+  aria-label="Audio toggle"
+>
+  🔇
+</button>
+
+<script>
+  import { Howl } from "howler";
+
+  const sound = new Howl({
+    src: ["/music/song.mp3"],
+    loop: true,
+    volume: 0.35, // 0.9 je fakt nahlas, odporúčam menej
+    html5: true,
+  });
+
+  const btn = document.getElementById("audioBtn");
+
+  let playing = false;
+  let startedOnce = false;
+
+  const setIcon = () => {
+    if (!btn) return;
+    btn.textContent = playing ? "🔊" : "🔇";
+  };
+
+  const startIfNeeded = () => {
+    if (startedOnce) return;
+    startedOnce = true;
+
+    sound.play();
+    playing = true;
+    setIcon();
+
+    cleanupAutoStart();
+  };
+
+  const cleanupAutoStart = () => {
+    window.removeEventListener("scroll", onScroll, { passive: true } as any);
+    window.removeEventListener("wheel", startIfNeeded as any);
+    window.removeEventListener("touchmove", startIfNeeded as any);
+    window.removeEventListener("keydown", startIfNeeded as any);
+  };
+
+  // Scroll handler – stačí micro scroll
+  const onScroll = () => startIfNeeded();
+
+  // Autostart: prvý scroll (a fallbacky)
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("wheel", startIfNeeded, { passive: true });
+  window.addEventListener("touchmove", startIfNeeded, { passive: true });
+  window.addEventListener("keydown", startIfNeeded);
+
+  // Manuálne toggle tlačidlom
+  btn?.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Ak ešte neštartovalo, klik tlačidlom ho štartne (fallback)
+    if (!startedOnce) {
+      startIfNeeded();
+      return;
+    }
+
+    if (playing) {
+      sound.pause();
+      playing = false;
+    } else {
+      sound.play();
+      playing = true;
+    }
+
+    setIcon();
+  });
+
+  setIcon();
+</script>
