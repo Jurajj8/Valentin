@@ -30,7 +30,8 @@
   const after = document.getElementById("afterYes");
 
   yes?.addEventListener("click", () => {
-    confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
+    confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 }, shapes: ["heart"],  colors: ["#ff6fae", "#ff9acb", "#ffd1e8"],
+ });
     after?.classList.remove("hidden");
     no?.setAttribute("disabled", "true");
     no?.classList.add("opacity-40", "cursor-not-allowed");
