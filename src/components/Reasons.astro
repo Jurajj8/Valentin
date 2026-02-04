@@ -1,30 +1,46 @@
 <section id="reasons" class="px-5 pb-28 section-feather bg-pastel-reasons min-h-[150svh] flex items-center justify-center">
-  <div class="mx-auto max-w-5xl">
+  <div class="mx-auto max-w-3xl w-full">
     <div class="text-center">
       <p class="text-xs tracking-[0.35em] uppercase opacity-70">Niečo, čo cítim</p>
-      <h2 class="mt-4 text-3xl md:text-5xl font-semibold">Prečo si to práve ty</h2>
+
+      <h2 class="mt-4 text-3xl md:text-5xl font-semibold">
+        Prečo si to práve ty
+      </h2>
+
       <p class="mt-4 text-base md:text-lg opacity-80 max-w-2xl mx-auto leading-relaxed">
-        Pretože s tebou je všetko ľahšie.
-A tichšie. A krajšie.
+        Pretože s tebou je všetko ľahšie.<br />
+        A tichšie. A krajšie.
       </p>
     </div>
 
-    <div class="mt-12 grid md:grid-cols-3 gap-5 reasons-grid">
+    {/* citáty */}
+    <div class="mt-14 space-y-6 md:space-y-7">
       {[
-        { icon: "🌸", text: "Si môj pokoj v chaose sveta." },
-        { icon: "✨", text: "Pri tebe sa mi ľahšie dýcha. A viac sa smejem." },
-        { icon: "🤍", text: "S tebou viem byť úplne sám sebou." },
-      ].map((item) => (
-        <div class="reveal card-glass soft-shadow rounded-3xl p-7 text-center">
-          <div class="text-2xl">{item.icon}</div>
-          <p class="mt-4 text-base md:text-lg leading-relaxed opacity-90">
-            {item.text}
-          </p>
-        </div>
+        { small: "Niekedy stačí len byť.", text: "Si môj pokoj v chaose sveta." },
+        { small: "Bez námahy.", text: "Pri tebe sa mi ľahšie dýcha. A viac sa smejem." },
+        { small: "A bez masky.", text: "S tebou viem byť úplne sám sebou." },
+      ].map((q) => (
+        <figure class="reveal-quote quoteRow">
+          <blockquote class="quote">
+            <p class="quoteText">{q.text}</p>
+          </blockquote>
+
+          <figcaption class="quoteCaption">
+            {q.small}
+          </figcaption>
+        </figure>
       ))}
     </div>
+
+    {/* jemný “divider” pod citátmi */}
+    <!-- <div class="mt-12 flex items-center justify-center gap-3 opacity-70">
+      <span class="h-px w-10 bg-black/10"></span>
+      <span class="text-xs tracking-[0.35em] uppercase">pre teba</span>
+      <span class="h-px w-10 bg-black/10"></span>
+    </div> -->
   </div>
 </section>
+
 
 <script>
   import gsap from "gsap";
@@ -33,30 +49,28 @@ A tichšie. A krajšie.
   gsap.registerPlugin(ScrollTrigger);
 
   const reasons = document.getElementById("reasons");
-  const cards = gsap.utils.toArray<HTMLElement>("#reasons .reveal");
+  const quotes = gsap.utils.toArray("#reasons .reveal-quote");
 
-  if (reasons && cards.length) {
-    // sekcia: jemný nábeh (ak používaš is-on class)
+  if (reasons && quotes.length) {
     ScrollTrigger.create({
       trigger: reasons,
       start: "top 80%",
       onEnter: () => reasons.classList.add("is-on"),
     });
 
-    // karty: elegantný stagger reveal
     gsap.fromTo(
-      cards,
-      { y: 22, opacity: 0, filter: "blur(6px)" },
+      quotes,
+      { y: 16, opacity: 0, filter: "blur(6px)" },
       {
         y: 0,
         opacity: 1,
         filter: "blur(0px)",
-        duration: 0.9,
+        duration: 0.85,
         ease: "power2.out",
-        stagger: 0.12,
+        stagger: 0.14,
         scrollTrigger: {
           trigger: reasons,
-          start: "top 75%",
+          start: "top 72%",
         },
       }
     );

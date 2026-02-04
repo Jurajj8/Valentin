@@ -154,3 +154,358 @@ body{
 }
 
 
+/* === Reasons as quotes (no cards) === */
+.quoteRow{
+  text-align: center;
+}
+
+.quote{
+  position: relative;
+  margin: 0 auto;
+  max-width: 42rem;
+
+  padding: 22px 22px 18px;
+  border-radius: 22px;
+
+  background: rgba(255,255,255,.50);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.72);
+
+  box-shadow: 0 18px 44px rgba(31,41,55,.10);
+}
+
+/* jemný “ľavý” akcent, ale stále centered layout */
+.quote::before{
+  content:"";
+  position:absolute;
+  left: 14px;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(232,106,141,.0), rgba(232,106,141,.45), rgba(232,106,141,.0));
+  opacity: .9;
+}
+
+/* dekoratívne úvodzovky */
+.quote::after{
+  content:"“";
+  position:absolute;
+  top: -22px;
+  left: 22px;
+  font-size: 64px;
+  line-height: 1;
+  opacity: .14;
+  pointer-events: none;
+}
+
+.quoteText{
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: .92;
+  letter-spacing: .01em;
+}
+
+/* malý jemný “podtitul” pod citátom */
+.quoteCaption{
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .55;
+}
+
+/* väčšie na desktop */
+@media (min-width: 768px){
+  .quote{
+    padding: 28px 28px 22px;
+    border-radius: 26px;
+  }
+  .quoteText{
+    font-size: 1.125rem;
+  }
+  .quote::after{
+    font-size: 76px;
+    top: -28px;
+  }
+}
+
+
+/* === HERO (typography-first, no big card) === */
+.heroKicker{
+  font-size: 12px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  opacity: .70;
+}
+
+.heroTitle{
+  position: relative;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.1rem, 4.5vw, 4rem);
+}
+
+/* jemný “brush” highlight za nadpisom */
+.heroTitle::before{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: min(520px, 92%);
+  height: 46%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(232,106,141,.22), transparent 70%);
+  filter: blur(2px);
+  z-index: -1;
+  opacity: .9;
+}
+
+.heroLead{
+  font-size: 1.05rem;
+  line-height: 1.75;
+  opacity: .78;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA – jemné “pill”, nie tlačidlo v krabici */
+.heroCta{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 26px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.75);
+
+  box-shadow: 0 18px 44px rgba(31,41,55,.10);
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.heroCta:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 26px 60px rgba(31,41,55,.14);
+}
+
+.heroCtaText{
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  letter-spacing: .08em;
+}
+
+.heroCtaGlow{
+  position:absolute;
+  inset:-8px;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(232,106,141,.28), transparent 70%);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.heroCta:hover .heroCtaGlow{ opacity: 1; }
+
+/* hint pod CTA */
+.heroHint{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  opacity: .55;
+}
+
+.heroHintLine{
+  height: 1px;
+  width: 42px;
+  background: rgba(0,0,0,.10);
+}
+
+.heroHintHeart{
+  font-size: 16px;
+  opacity: .85;
+}
+
+
+/* === FINAL QUESTION (poetic, airy, no big card) === */
+.finalSection{ position: relative; }
+
+.finalKicker{
+  font-size: 12px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  opacity: .65;
+}
+
+.finalTitle{
+  position: relative;
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.3rem, 4.8vw, 4.4rem);
+}
+
+/* jemný highlight ako v hero */
+.finalTitle::before{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 95%);
+  height: 48%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(232,106,141,.20), transparent 70%);
+  z-index: -1;
+  opacity: .95;
+}
+
+.finalLead{
+  font-size: 1.05rem;
+  line-height: 1.75;
+  opacity: .78;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.finalDivider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  opacity: .60;
+}
+.finalDivider span{
+  height: 1px;
+  width: 54px;
+  background: rgba(0,0,0,.10);
+}
+.finalDivider i{
+  font-style: normal;
+  font-size: 16px;
+  opacity: .85;
+}
+
+/* actions */
+.finalActions{ min-height: 56px; }
+
+/* YES – jemný pill glass, ale výraznejší */
+.finalYes{
+  position: relative;
+  display: inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 28px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.62);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.78);
+
+  box-shadow: 0 18px 44px rgba(31,41,55,.12);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.finalYes:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 26px 62px rgba(31,41,55,.16);
+}
+
+.finalYesText{
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.finalYesGlow{
+  position:absolute;
+  inset:-10px;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(232,106,141,.28), transparent 70%);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.finalYes:hover .finalYesGlow{ opacity: 1; }
+
+/* NO – decent, jemné, ale hravé */
+.finalNo{
+  border-radius: 999px;
+  padding: 12px 22px;
+  background: rgba(255,255,255,.40);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.65);
+  opacity: .75;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+.finalNo:hover{
+  opacity: .95;
+  background: rgba(255,255,255,.55);
+  transform: translateY(-1px);
+}
+.finalNo.is-disabled{
+  opacity: .35 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* after yes */
+.finalAfter{
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(6px);
+  transition: opacity .5s ease, transform .5s ease, filter .5s ease;
+}
+.finalAfter.is-on{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.finalAfterTitle{
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+.finalAfterText{
+  margin-top: 6px;
+  opacity: .78;
+  line-height: 1.7;
+}
+
+.finalActionsGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  max-width: 420px;
+  margin-inline: auto;
+  position: relative;
+}
+
+.yesZone{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 16px;
+}
+
+.noZone{
+  position: relative;
+  height: 56px;
+}
+
+/* NO sa hýbe len v tejto zóne */
+.noZone .finalNo{
+  position: absolute;
+  left: 0;
+  top: 0;
+}

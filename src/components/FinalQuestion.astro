@@ -1,23 +1,41 @@
-<section class="px-5 pb-28">
-  <div class="mx-auto max-w-3xl text-center glass soft-shadow rounded-3xl p-10 md:p-14">
-    <h2 class="text-4xl md:text-5xl font-semibold">Budeš mojou Valentínkou?</h2>
-    <p class="mt-4 opacity-80">Klikni úprimne. Ale ja už aj tak tuším odpoveď. 😌</p>
+<section id="final" class="finalSection px-5 pb-28 section-feather bg-pastel-final min-h-[50svh] flex items-center justify-center">
+  <div class="mx-auto w-full max-w-3xl text-center">
+    <p class="finalKicker">V jednom obyčajnom momente…</p>
 
-    <div class="mt-10 flex items-center justify-center gap-4 relative">
-      <button id="yesBtn"
-        class="rounded-full px-7 py-3 bg-white/90 hover:bg-white transition soft-shadow text-lg font-medium">
-        ÁNO 💗
-      </button>
+    <h2 class="finalTitle mt-5">
+      Budeš mojou
+      <span class="block">Valentínkou?</span>
+    </h2>
 
-      <button id="noBtn"
-        class="rounded-full px-6 py-3 bg-white/70 hover:bg-white/80 transition">
-        Nie…
-      </button>
+    <p class="finalLead mt-6">
+      Klikni úprimne.
+      <br />
+      Ja už aj tak tuším odpoveď. 😌
+    </p>
+
+    <div class="finalDivider mt-10" aria-hidden="true">
+      <span></span><i>♥</i><span></span>
     </div>
 
-    <div id="afterYes" class="mt-10 hidden">
-      <p class="text-2xl font-semibold">YES! 🥹💞</p>
-      <p class="mt-2 opacity-80">Tak teraz už len pusa a plán na večer.</p>
+    <div class="mt-10 finalActionsGrid">
+  <div class="yesZone">
+    <button id="yesBtn" class="finalYes group" type="button">
+      <span class="finalYesGlow"></span>
+      <span class="finalYesText">ÁNO 💗</span>
+    </button>
+  </div>
+
+  <div class="noZone">
+    <button id="noBtn" class="finalNo" type="button">
+      Nie…
+    </button>
+  </div>
+</div>
+
+
+    <div id="afterYes" class="finalAfter mt-10 hidden" role="status" aria-live="polite">
+      <p class="finalAfterTitle">YES! 🥹💞</p>
+      <p class="finalAfterText">Tak teraz už len pusa a plán na večer.</p>
     </div>
   </div>
 </section>
@@ -29,32 +47,54 @@
   const no = document.getElementById("noBtn");
   const after = document.getElementById("afterYes");
 
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   yes?.addEventListener("click", () => {
-    confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 }, shapes: ["heart"],  colors: ["#ff6fae", "#ff9acb", "#ffd1e8"],
- });
+    // jemnejšie konfety (stále cute)
+    confetti({
+      particleCount: 110,
+      spread: 65,
+      origin: { y: 0.72 },
+      shapes: ["heart"],
+      colors: ["#E86A8D", "#F4A6B8", "#FFD1E8"],
+    });
+
     after?.classList.remove("hidden");
+    after?.classList.add("is-on");
+
+    // “Nie…” zjemníme a zneškodníme
     no?.setAttribute("disabled", "true");
-    no?.classList.add("opacity-40", "cursor-not-allowed");
+    no?.classList.add("is-disabled");
   });
 
-  // No button “uteká” (desktop) + “posúva sa” (mobile)
-  const moveNo = () => {
-    if (!no) return;
-    const parent = no.parentElement;
-    if (!parent) return;
+  // Elegantné “uhýbanie” – len trochu, nech to pôsobí hravo, nie chaoticky
+  const nudgeNo = () => {
+  if (!no || prefersReduced) return;
 
-    const rect = parent.getBoundingClientRect();
-    const x = Math.random() * (rect.width - no.clientWidth);
-    const y = Math.random() * 30; // jemne, nech to nevyzerá jak bug
+  const zone = no.parentElement;
+  if (!zone) return;
 
-    no.style.position = "absolute";
-    no.style.left = `${x}px`;
-    no.style.top = `${y}px`;
-  };
+  const maxX = zone.clientWidth - no.clientWidth;
+  const maxY = zone.clientHeight - no.clientHeight;
 
-  no?.addEventListener("mouseenter", moveNo);
-  no?.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    moveNo();
-  }, { passive: false });
+  const x = Math.random() * Math.max(0, maxX);
+  const y = Math.random() * Math.max(0, maxY);
+
+  no.style.transform = `translate(${x}px, ${y}px)`;
+};
+
+
+  no?.addEventListener("mouseenter", nudgeNo);
+  no?.addEventListener(
+    "touchstart",
+    (e) => {
+      if (prefersReduced) return;
+      e.preventDefault();
+      nudgeNo();
+    },
+    { passive: false }
+  );
 </script>
